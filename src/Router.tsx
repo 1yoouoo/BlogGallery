@@ -1,15 +1,18 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import React from 'react';
-import ListPage from './pages/ListPage';
-import ViewPage from './pages/ViewPage';
+
+const ListPage = lazy(() => import('./pages/ListPage'));
+const ViewPage = lazy(() => import('./pages/ViewPage'));
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ListPage />}></Route>
-        <Route path="/view/:id" element={<ViewPage />}></Route>
-      </Routes>
+      <Suspense fallback={<div>로딩중 ...</div>}>
+        <Routes>
+          <Route path="/" Component={ListPage}></Route>
+          <Route path="/view/:id" Component={ViewPage}></Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };

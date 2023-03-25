@@ -26,24 +26,19 @@ const ViewPage: React.FC = () => {
     }
   }, [getArticle, id]);
 
-  return article ? (
-    <StyledViewPage className={'ViewPage'}>
-      <StyledViewPageTitle className={'ViewPage__title'}>
-        {article.title}
-      </StyledViewPageTitle>
-      <StyledViewPageImage
-        className={'ViewPage__image'}
-        src={article.image}
-        alt="thumnail"
-      />
-      <StyledViewPageContent className={'ViewPage__content'}>
-        <ReactMarkdown components={{ code: CodeBlock }}>
-          {article.content}
-        </ReactMarkdown>
-      </StyledViewPageContent>
-    </StyledViewPage>
-  ) : (
-    <div>loading..</div>
+  return (
+    article && (
+      <StyledViewPage>
+        <StyledViewPageTitle>{article.title}</StyledViewPageTitle>
+        <StyledViewPageImage src={article.image} alt="thumnail" />
+        <StyledViewPageContent>
+          <ReactMarkdown
+            components={{ code: CodeBlock }}
+            children={article.content}
+          />
+        </StyledViewPageContent>
+      </StyledViewPage>
+    )
   );
 };
 
