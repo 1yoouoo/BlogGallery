@@ -3,9 +3,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import service from '../libs/api';
 import Article from './Article';
-
+interface ArticleType {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  createdTime: string;
+}
 const ArticleList = () => {
-  const [articles, setArticles] = useState<any>([]);
+  const [articles, setArticles] = useState<ArticleType[]>([]);
   const getArticles = () => {
     service.get('/read').then((result) => {
       setArticles(result);
@@ -18,7 +24,7 @@ const ArticleList = () => {
     <StyledArticleList>
       <ul>
         {articles &&
-          articles.map((article: any) => (
+          articles.map((article) => (
             <li key={article.id}>
               <Link
                 to={`/view/${article.id}`}

@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import service from '../libs/api';
 import CodeBlock from '../components/CodeBlock';
-interface Article {
+export interface Article {
   id: number;
   title: string;
   content: string;
   image: string;
 }
-const ViewPage = () => {
+const ViewPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [article, setArticle] = useState<Article | null>(null);
   // 게시글 가져오기

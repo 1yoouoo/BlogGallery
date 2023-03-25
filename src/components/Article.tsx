@@ -1,12 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-
-function zeroPad(value: any, len: any) {
+interface ArticleProps {
+  title: string;
+  content: string;
+  createdTime: string;
+  image: string;
+}
+function zeroPad(value: number, len: number): string {
   const str = '0000000000' + value.toString();
   return str.substring(str.length - len);
 }
 
-function getParametersForUnsplash({ width, height, quality, format }: any) {
+function getParametersForUnsplash({
+  width,
+  height,
+  quality,
+  format,
+}: {
+  width: number;
+  height: number;
+  quality: number;
+  format: string;
+}): string {
   return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`;
 }
 
@@ -14,7 +29,7 @@ function getParametersForUnsplash({ width, height, quality, format }: any) {
  * 파라미터로 넘어온 문자열에서 일부 특수문자를 제거하는 함수
  * (Markdown으로 된 문자열의 특수문자를 제거하기 위함)
  * */
-function removeSpecialCharacter(str: any) {
+function removeSpecialCharacter(str: string) {
   const removeCharacters = [
     '#',
     '_',
@@ -49,9 +64,8 @@ function removeSpecialCharacter(str: any) {
   return _str;
 }
 
-const Article = (props: any) => {
+const Article = (props: ArticleProps) => {
   const createdTime = new Date(props.createdTime);
-  console.log(props);
   return (
     <StyledArticle>
       <StyledArticleSummary>
