@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  return <div className="App">안녕하세요</div>;
+  const [test, setTest] = useState<any>('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/todos');
+      setTest(response);
+    };
+    fetchData();
+  }, []);
+  return <div className="App">{test}</div>;
 }
 
 export default App;
