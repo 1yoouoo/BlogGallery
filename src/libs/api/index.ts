@@ -1,28 +1,28 @@
 import apiConfig from './apiConfig';
 
 const service = {
-  get: (url: any, params?: any) => {
+  get: (url: string, params?: any) => {
     return apiConfig({
       url,
       params,
       method: 'GET',
     }).then((res) => res.data);
   },
-  post: (url: any, data: any) => {
+  post: (url: string, data: any) => {
     return apiConfig({
       url,
       data,
       method: 'POST',
     }).then((res) => res.data);
   },
-  delete: (url: any, data: any) => {
+  delete: (url: string, data: any) => {
     return apiConfig({
       url,
       data,
       method: 'DELETE',
     }).then((res) => res.data);
   },
-  put: (url: any, data: any) => {
+  put: (url: string, data: any) => {
     return apiConfig({
       url,
       data,

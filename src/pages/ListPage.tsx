@@ -3,10 +3,13 @@ import service from '../libs/api';
 
 const ListPage = () => {
   const [articles, setArticles] = useState<any>([]);
-  useEffect(() => {
+  const getArticles = () => {
     service.get('/read').then((result) => {
       console.log(result);
     });
+  };
+  useEffect(() => {
+    getArticles();
   }, []);
   return <div>this is ListPage</div>;
 };
