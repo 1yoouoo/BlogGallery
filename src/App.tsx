@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
-import service from './libs/api';
+import ListPage from './pages/ListPage';
 
 function App() {
-  const [test, setTest] = useState<any>('');
-
-  useEffect(() => {
-    service.post('/read', { id: 1 }).then((result) => {
-      console.log(result);
-      setTest(result.message);
-    });
-  }, []);
-  return <div className="App">{test}</div>;
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ListPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
