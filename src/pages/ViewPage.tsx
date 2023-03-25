@@ -30,7 +30,7 @@ const ViewPage: React.FC = () => {
     article && (
       <StyledViewPage>
         <StyledViewPageTitle>{article.title}</StyledViewPageTitle>
-        <StyledViewPageImage src={article.image} alt="thumnail" />
+        <StyledViewPageImage src={`${article.image}?w=700`} alt="thumnail" />
         <StyledViewPageContent>
           <ReactMarkdown
             components={{ code: CodeBlock }}
