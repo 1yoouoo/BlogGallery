@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import service from './libs/api';
 
 function App() {
   const [test, setTest] = useState<any>('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/todos');
-      setTest(response);
-    };
-    fetchData();
+    service.post('/read', { id: 1 }).then((result) => {
+      console.log(result);
+      setTest(result.message);
+    });
   }, []);
   return <div className="App">{test}</div>;
 }
