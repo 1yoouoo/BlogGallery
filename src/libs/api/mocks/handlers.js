@@ -1,7 +1,10 @@
 import { rest } from 'msw';
-import { mockRead, mockWrite } from './resolvers/mockBokboot';
+import {
+  mockGetAllArticles,
+  mockGetArticleById,
+} from './resolvers/mockBokboot';
 
 export const handlers = [
-  rest.post('/write', mockWrite),
-  rest.get('/read', mockRead),
+  rest.get('/read', mockGetAllArticles),
+  rest.get('/read/:id', mockGetArticleById),
 ];
