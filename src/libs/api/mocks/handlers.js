@@ -3,5 +3,5 @@ import { mockRead, mockWrite } from './resolvers/mockBokboot';
 
 export const handlers = [
   rest.post('/write', mockWrite),
-  rest.post('/read', mockRead),
+  rest.get('/read', mockRead),
 ];

@@ -5,6 +5,7 @@ import {
   RestContext,
   RestRequest,
 } from 'msw';
+import data from '../../../../server/database.js';
 
 interface CodeProps {
   code: string;
@@ -38,19 +39,13 @@ const mockRead = async (
   res: ResponseComposition<DefaultBodyType>,
   ctx: RestContext,
 ) => {
-  const { id } = req.body;
-  if (!id)
-    return res(
-      ctx.status(500),
-      ctx.json({ message: 'Please, Enter Code Id.' }),
-    );
-  return res(
-    ctx.status(200),
-    ctx.json({
-      code: 'console.log("hi")',
-      message: 'Code load was successful',
-    }),
-  );
+  // const { id } = req.body;
+  // if (!id)
+  //   return res(
+  //     ctx.status(500),
+  //     ctx.json({ message: 'Please, Enter Code Id.' }),
+  //   );
+  return res(ctx.status(200), ctx.json(data));
 };
 
 export { mockWrite, mockRead };

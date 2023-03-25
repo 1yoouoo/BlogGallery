@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import service from '../libs/api';
 
 const ListPage = () => {
-  return <div></div>;
+  const [articles, setArticles] = useState<any>([]);
+  useEffect(() => {
+    service.get('/read').then((result) => {
+      console.log(result);
+    });
+  }, []);
+  return <div>this is ListPage</div>;
 };
 
 export default ListPage;

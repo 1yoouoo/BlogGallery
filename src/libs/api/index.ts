@@ -1,7 +1,7 @@
 import apiConfig from './apiConfig';
 
 const service = {
-  get: (url: any, params: any) => {
+  get: (url: any, params?: any) => {
     return apiConfig({
       url,
       params,
