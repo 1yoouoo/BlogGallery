@@ -1,20 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import service from '../libs/api';
-
+import CodeBlock from '../components/CodeBlock';
+interface Article {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+}
 const ViewPage = () => {
-  const { id } = useParams();
-  const [article, setArticle] = useState<any>(false);
+  const { id } = useParams<{ id: string }>();
+  const [article, setArticle] = useState<Article | null>(null);
   // 게시글 가져오기
-  const getArticle = useCallback((id: any) => {
+  const getArticle = useCallback((id: string) => {
     service.get(`/read/${id}`).then((result) => {
       setArticle(result);
     });
   }, []);
 
   useEffect(() => {
-    getArticle(id);
+    if (id) {
+      getArticle(id);
+    }
   }, [getArticle, id]);
 
   return article ? (
@@ -28,7 +37,9 @@ const ViewPage = () => {
         alt="thumnail"
       />
       <StyledViewPageContent className={'ViewPage__content'}>
-        {/* <ReactMarkdown source={article.content} renderers={{ code: CodeBlock }} /> */}
+        <ReactMarkdown components={{ code: CodeBlock }}>
+          {article.content}
+        </ReactMarkdown>
       </StyledViewPageContent>
     </StyledViewPage>
   ) : (
