@@ -1,0 +1,48 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import service from '../libs/api';
+import Article from './Article';
+
+const ArticleList = () => {
+  const [articles, setArticles] = useState<any>([]);
+  const getArticles = () => {
+    service.get('/read').then((result) => {
+      setArticles(result);
+    });
+  };
+  useEffect(() => {
+    getArticles();
+  }, []);
+  return (
+    <StyledArticleList>
+      <ul>
+        {articles &&
+          articles.map((article: any) => (
+            <li key={article.id}>
+              <Link
+                to={`/view/${article.id}`}
+                style={{ textDecoration: 'none', color: 'initial' }}
+              >
+                <Article {...article} />
+              </Link>
+            </li>
+          ))}
+      </ul>
+    </StyledArticleList>
+  );
+};
+
+const StyledArticleList = styled.div`
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    overflow: hidden;
+    width: 100%;
+    padding: 25px 0 30px;
+    border-bottom: 1px solid #eee;
+  }
+`;
+export default ArticleList;
