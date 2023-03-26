@@ -10,12 +10,17 @@ interface ArticleType {
   image: string;
   createdTime: string;
 }
+
 const ArticleList = () => {
   const [articles, setArticles] = useState<ArticleType[]>([]);
   const getArticles = () => {
     service.get('/read').then((result) => {
       setArticles(result);
     });
+  };
+  const handleMouseEnter = (article: ArticleType) => {
+    const img = new Image();
+    img.src = `${article.image}?w=700`;
   };
   useEffect(() => {
     getArticles();
@@ -25,7 +30,7 @@ const ArticleList = () => {
       <ul>
         {articles &&
           articles.map((article) => (
-            <li key={article.id}>
+            <li key={article.id} onMouseEnter={() => handleMouseEnter(article)}>
               <Link
                 to={`/view/${article.id}`}
                 style={{ textDecoration: 'none', color: 'initial' }}

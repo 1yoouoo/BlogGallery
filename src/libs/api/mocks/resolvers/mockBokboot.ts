@@ -16,7 +16,11 @@ const mockGetAllArticles = async (
   res: ResponseComposition<DefaultBodyType>,
   ctx: RestContext,
 ) => {
-  return res(ctx.status(200), ctx.json(articles));
+  return res(
+    ctx.status(200),
+    ctx.json(articles),
+    ctx.set('Cache-Control', 'max-age=3600'),
+  );
 };
 
 const mockGetArticleById = async (
